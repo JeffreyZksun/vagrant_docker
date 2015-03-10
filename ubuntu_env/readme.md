@@ -1,7 +1,7 @@
 Windows 7 OS
 ====
 
-- Vagrant box: Windows
+- Vagrant box: Ubuntu
 - Host OS: Windows 7
 
 Prerequisite
@@ -13,16 +13,23 @@ Prerequisite
 3. [Git]( http://git-scm.com/download/win "git")
 
 
-Start and connect to vagrant box
+Start and ssh connect to vagrant box
 ----
 
 	Open gitbash (not the window cmd. You can use git, ssh in this bash.)
 	$ cd path\to\git_repo\
 	$ git clone https://github.com/JeffreyZksun/vagrant_docker.git
-	$ cd win7_env
+	$ cd ubuntu_env
 	$ vagrant up
-	$ vagrant rdp
+	$ vagrant ssh
+	$ cd /vagrant
 	... do what you want, you can edit source file in host OS ...
+
+
+Reference
+----
+ - [Getting Started with Vagrant on Windows](http://www.sitepoint.com/getting-started-vagrant-windows/)
+
 
 
 ----------
@@ -31,7 +38,7 @@ Start and connect to vagrant box
 Mac OS X
 ====
 
-- Vagrant box: Windows
+- Vagrant box: Ubuntu
 - Host OS: Mac OS X
 
 Prerequisite
@@ -50,5 +57,8 @@ Start and ssh connect to vagrant box
 	$ git clone https://github.com/JeffreyZksun/vagrant_docker.git
 	$ cd ubuntu_env
 	$ vagrant up
-	$ vagrant rdp
+	$ vagrant ssh
+	$ cd /vagrant
 	... do what you want, you can edit source file in host OS ...
+
+
