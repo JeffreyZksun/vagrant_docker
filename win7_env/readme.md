@@ -21,9 +21,10 @@ Start and connect to vagrant box
 	$ git clone https://github.com/JeffreyZksun/vagrant_docker.git
 	$ cd win7_env
 	$ vagrant up
-	$ vagrant rdp
+	Use the windows remote desktop connection to connect the os. (user name: vagrant, password: vagrant. Enable remote display "Display|RemoteDisplay" if fails.)
 	... do what you want, you can edit source file in host OS ...
 
+**Note**: `$ vagrant rdp` should work as well to connect guest windows machine. But I never succeed with it.
 
 ----------
 
@@ -50,5 +51,5 @@ Start and ssh connect to vagrant box
 	$ git clone https://github.com/JeffreyZksun/vagrant_docker.git
 	$ cd ubuntu_env
 	$ vagrant up
-	$ vagrant rdp
+	Use the windows remote desktop connection to connect the os. (user name: vagrant, password: vagrant)
 	... do what you want, you can edit source file in host OS ...
