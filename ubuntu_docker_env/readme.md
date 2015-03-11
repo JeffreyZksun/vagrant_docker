@@ -13,8 +13,8 @@ Softwares
 Ports mapping
 ----
 
-| Host        	| Vagrant Box   | 
-| 8000      	| 8000 |
+| Host   | Vagrant Box  | 
+| 8000   | 8000 		|
 
 
 
