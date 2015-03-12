@@ -21,8 +21,7 @@ RUN rm -rf node-${NODE_VER}-linux-x64
 EXPOSE 80
 
 # The root folder of the server.
-ENV SRC_ROOT /var/www
-Volume $SRC_ROOT
+VOLUME /var/www
 
 # start the server
 WORKDIR /var/www

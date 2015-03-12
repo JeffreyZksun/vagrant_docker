@@ -6,8 +6,11 @@ Create image from dockerfile
 
 Start the container in daemon
 ----
-	$ docker run --name nodejsserver jeffreyzksun/nodejs:v0.10.24  
+	$ docker run --name nodejsserver -p 8000:80 -v $(pwd):/var/www -d jeffreyzksun/nodejs:v0.10.24
+	$ docker logs nodejsserver
 
+	$ docker start nodejsserver /bin/bash
+	$ docker attach nodejsserver 
 Start container with interactive bash shell
 ----
 
