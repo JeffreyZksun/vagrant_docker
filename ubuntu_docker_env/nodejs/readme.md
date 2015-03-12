@@ -1,5 +1,6 @@
 Getting Started
 ====
+The parent folder (host) of the dockerfile will be mounted to /var/www in containter. The start.sh script is executed by default after the container starts up. You'd better to put all the nodejs files in this folder.
 
 	$ docker build -t "jeffreyzksun/nodejs:v0.10.24" .
 	$ docker run --name nodejsserver -p 8000:80 -v $(pwd):/var/www -d jeffreyzksun/nodejs:v0.10.24
