@@ -29,7 +29,7 @@ Port mapping
 Shared folder
 ----
 | Host   | Docker container | 
-| $(pwd) | /var/www 		|
+| $(pwd) | /service/www 		|
 
 
 Other useful commands

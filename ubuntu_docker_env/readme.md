@@ -17,5 +17,12 @@ Ports mapping
 | 8000   | 8000 		|
 
 
+Docker container rules
+====
+The folder structure for the service related stuffs.
+
+ - `/service/xxx` The source code of the service.
+ - `/data/xxx` The data storage.
+ - `/config/xxx` The config files. 
 
 
