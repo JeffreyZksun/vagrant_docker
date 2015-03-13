@@ -21,8 +21,11 @@ RUN rm -rf node-${NODE_VER}-linux-x64
 EXPOSE 80
 
 # The root folder of the server.
-VOLUME /var/www
+RUN mkdir -p /service/www
+VOLUME /service/www
 
 # start the server
-WORKDIR /var/www
-CMD ["./start.sh"]
+WORKDIR /service/www
+CMD npm install && npm start
+
+#CMD ["/service/www/start.sh"]

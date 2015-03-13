@@ -1,9 +1,12 @@
 Getting Started
 ====
-The parent folder (host) of the dockerfile will be mounted to /service/www in containter. You'd better to put all the nodejs files in this folder.
+The parent folder (host) of the dockerfile will be mounted to /data/www in containter. The start.sh script is executed by default after the container starts up. You'd better to put all the nodejs files in this folder.
 
 	$ docker build -t "jeffreyzksun/nodejs:v0.10.24" .
-	$ docker run --name nodejsserver -p 8000:80 -v $(pwd):/service/www -d jeffreyzksun/nodejs:v0.10.24
+	$ docker run --name nodejsserver -p 8000:80 -v $(pwd):/var/www -d jeffreyzksun/nodejs:v0.10.24
+	
+Access http://localhost:8000/package.json in the browser.
+
 	$ docker stop nodejsserver
 	$ docker start nodejsserver
 
@@ -19,6 +22,10 @@ Softwares
 
 - nodejs v0.10.24
 
+Default command
+----
+
+	npm install && npm start
 
 Port mapping
 ----
@@ -28,8 +35,8 @@ Port mapping
 
 Shared folder
 ----
-| Host   | Docker container | 
-| $(pwd) | /service/www 		|
+| Host   	| Docker container 	| 
+| $(pwd)/db | /data/db 			|
 
 
 Other useful commands
@@ -37,8 +44,7 @@ Other useful commands
 
 	$ docker attach nodejsserver
 	$ docker inspect nodejsserver
-	$ docker logs nodejsserver
-	$ docker run -p 8000:80 -v $(pwd):/service/www --rm -it jeffreyzksun/nodejs:v0.10.24  /bin/bash 
+	$ docker run -p 8000:80 -v $(pwd):/var/www --rm -it jeffreyzksun/nodejs:v0.10.24  /bin/bash 
 	$ docker history jeffreyzksun/nodejs:v0.10.24
  
 Trouble shouting
