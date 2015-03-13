@@ -1,14 +1,13 @@
 Getting Started
 ====
-The parent folder (host) of the dockerfile will be mounted to /data/www in containter. The start.sh script is executed by default after the container starts up. You'd better to put all the nodejs files in this folder.
 
-	$ docker build -t "jeffreyzksun/nodejs:v0.10.24" .
-	$ docker run --name nodejsserver -p 8000:80 -v $(pwd):/var/www -d jeffreyzksun/nodejs:v0.10.24
+	$ docker build -t "jeffreyzksun/mongodb:v3.0.0" .
+	$ docker run --name mongodbserver -p 27017:27017 -v $(pwd):/data/db -d jeffreyzksun/mongodb:v3.0.0
 	
-Access http://localhost:8000/package.json in the browser.
+Connect mongodb with port 27017.
 
-	$ docker stop nodejsserver
-	$ docker start nodejsserver
+	$ docker stop mongodbserver
+	$ docker start mongodbserver
 
 Infrastructure
 ====
@@ -25,13 +24,13 @@ Softwares
 Default command
 ----
 
-	npm install && npm start
+	`/entrypoint.sh` inclide the container. 
 
 Port mapping
 ----
 
 | Host   | Docker container | 
-| 8000   | 80 				|
+| 27017  | 27017 			|
 
 Shared folder
 ----
@@ -39,18 +38,36 @@ Shared folder
 | $(pwd)/db | /data/db 			|
 
 
+Base image: https://registry.hub.docker.com/_/mongo/ 
+
 Other useful commands
 ====
 
-	$ docker attach nodejsserver
-	$ docker inspect nodejsserver
-	$ docker run -p 8000:80 -v $(pwd):/var/www --rm -it jeffreyzksun/nodejs:v0.10.24  /bin/bash 
-	$ docker history jeffreyzksun/nodejs:v0.10.24
+	$ docker attach mongodbserver
+	$ docker inspect mongodbserver
+	$ docker logs mongodbserver
+	$ docker run -p 27017:27017 -v $(pwd)/db:/data/db --rm -it jeffreyzksun/mongodb:v3.0.0  /bin/bash 
+	$ docker history jeffreyzksun/mongodb:v3.0.0
  
-Trouble shouting
-====
-Failed to execute the build instruction. `$ docker build -t "jeffreyzksun/nodejs:v0.10.24" .`
+ entrypoint.sh inside the container.
+ ===
 
-The error looks like this: Error response from daemon: Cannot start container 9f3bd8d72f0704980cedacc068261c38e280e7314916245550a6d48431ea8f11: fork/exec /var/lib/docker/init/dockerinit-1.0.1: cannot allocate memory
+	#!/bin/bash
+	set -e
 
-Solution: execute `$ sudo service docker.io restart` and then try again.
+	if [ "${1:0:1}" = '-' ]; then
+	        set -- mongod "$@"
+	fi
+
+	if [ "$1" = 'mongod' ]; then
+	        chown -R mongodb /data/db
+
+	        numa='numactl --interleave=all'
+	        if $numa true &> /dev/null; then
+	                set -- $numa "$@"
+	        fi
+
+	        exec gosu mongodb "$@"
+	fi
+
+	exec "$@"
