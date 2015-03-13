@@ -2,6 +2,10 @@ Getting Started
 ====
 
 	$ docker build -t "jeffreyzksun/mongodb:v3.0.0" .
+	$ docker run --name mongodbserver -p 27017:27017 -d jeffreyzksun/mongodb:v3.0.0
+	
+The command with the volume below doesn't work.
+
 	$ docker run --name mongodbserver -p 27017:27017 -v $(pwd)/db:/data/db -d jeffreyzksun/mongodb:v3.0.0
 	
 Connect mongodb with port 27017. 
