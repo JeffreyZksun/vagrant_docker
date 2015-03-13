@@ -7,6 +7,8 @@ This container runs a mongodb service at port 27017. You can you a folder in the
 	
 Connect mongodb with port 27017. 
 
+	$ docker run -it --link mongodbserver:mongo --rm jeffreyzksun/mongodb:v3.0.0 sh -c 'exec mongo "$MONGO_PORT_27017_TCP_ADDR:$MONGO_PORT_27017_TCP_PORT/test"'
+
 Next time use the start/stop instrunction to operate the container.
 
 	$ docker stop mongodbserver
