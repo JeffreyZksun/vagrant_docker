@@ -2,15 +2,11 @@ Getting Started
 ====
 
 	$ docker build -t "jeffreyzksun/mongodb:v3.0.0" .
-	$ docker run --name mongodbserver -p 27017:27017 -d jeffreyzksun/mongodb:v3.0.0
-	
-The command with the volume below doesn't work.
-
-	$ docker run --name mongodbserver -p 27017:27017 -v $(pwd)/db:/data/db -d jeffreyzksun/mongodb:v3.0.0
+	$ docker run --name mongodbserver -p 27017:27017 -v /data/db:/data/db -d jeffreyzksun/mongodb:v3.0.0
 	
 Connect mongodb with port 27017. 
 
-Next time use the start/stop instrunction to operation the container.
+Next time use the start/stop instrunction to operate the container.
 
 	$ docker stop mongodbserver
 	$ docker start mongodbserver
@@ -41,8 +37,9 @@ Port mapping
 Shared folder
 ----
 | Host   	| Docker container 	| 
-| $(pwd)/db | /data/db 			|
+| /data/db | /data/db 			|
 
+Note: if the host OS is a virtual box machine. Don't use the shared folder as the volume, since there is permission issue.
 
 Base image: https://registry.hub.docker.com/_/mongo/ 
 
@@ -52,7 +49,7 @@ Other useful commands
 	$ docker attach mongodbserver
 	$ docker inspect mongodbserver
 	$ docker logs mongodbserver
-	$ docker run -p 27017:27017 -v $(pwd)/db:/data/db --rm -it jeffreyzksun/mongodb:v3.0.0  /bin/bash 
+	$ docker run -p 27017:27017 -v /data/db:/data/db --rm -it jeffreyzksun/mongodb:v3.0.0  /bin/bash 
 	$ docker history jeffreyzksun/mongodb:v3.0.0
  
 entrypoint.sh inside the container.
@@ -77,3 +74,37 @@ entrypoint.sh inside the container.
 	fi
 
 	exec "$@"
+
+Trouble shouting
+====
+
+The mongodb service fails to start when use the mounted volume in the virtual box image. The reason is because the  folder is mounted in using vbox shared folders. See https://github.com/docker/docker/issues/9619.
+
+	$ docker run --rm -p 27017:27017 -v $(pwd)/db7:/data/db mongo
+	2015-03-13T07:37:55.820+0000 I CONTROL  [initandlisten] MongoDB starting : pid=1 port=27017 dbpath=/data/db 64-bit host=
+	c14ce6f563e6
+	2015-03-13T07:37:55.821+0000 I CONTROL  [initandlisten] db version v3.0.0
+	2015-03-13T07:37:55.821+0000 I CONTROL  [initandlisten] git version: a841fd6394365954886924a35076691b4d149168
+	2015-03-13T07:37:55.822+0000 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.1e 11 Feb 2013
+	2015-03-13T07:37:55.822+0000 I CONTROL  [initandlisten] build info: Linux ip-10-171-101-151 3.2.0-4-amd64 #1 SMP Debian
+	3.2.46-1 x86_64 BOOST_LIB_VERSION=1_49
+	2015-03-13T07:37:55.822+0000 I CONTROL  [initandlisten] allocator: tcmalloc
+	2015-03-13T07:37:55.823+0000 I CONTROL  [initandlisten] options: {}
+	2015-03-13T07:37:55.847+0000 I JOURNAL  [initandlisten] journal dir=/data/db/journal
+	2015-03-13T07:37:55.850+0000 I JOURNAL  [initandlisten] recover : no journal files present, no recovery needed
+	2015-03-13T07:37:55.853+0000 I JOURNAL  [initandlisten] info preallocateIsFaster couldn't run due to: couldn't open file
+	 /data/db/journal/tempLatencyTest for writing errno:9 Bad file descriptor; returning false
+	2015-03-13T07:37:55.854+0000 I JOURNAL  [initandlisten] Unable to remove temporary file due to: boost::filesystem::remov
+	e: Text file busy: "/data/db/journal/tempLatencyTest"
+	2015-03-13T07:37:55.856+0000 I STORAGE  [initandlisten] exception in initAndListen: 13516 couldn't open file /data/db/jo
+	urnal/j._0 for writing errno:9 Bad file descriptor, terminating
+	2015-03-13T07:37:55.856+0000 I CONTROL  [initandlisten] now exiting
+	2015-03-13T07:37:55.856+0000 I NETWORK  [initandlisten] shutdown: going to close listening sockets...
+	2015-03-13T07:37:55.857+0000 I NETWORK  [initandlisten] removing socket file: /tmp/mongodb-27017.sock
+	2015-03-13T07:37:55.858+0000 I NETWORK  [initandlisten] shutdown: going to flush diaglog...
+	2015-03-13T07:37:55.858+0000 I NETWORK  [initandlisten] shutdown: going to close sockets...
+	2015-03-13T07:37:55.858+0000 I STORAGE  [initandlisten] shutdown: waiting for fs preallocator...
+	2015-03-13T07:37:55.858+0000 I STORAGE  [initandlisten] shutdown: final commit...
+	2015-03-13T07:37:55.859+0000 I STORAGE  [initandlisten] shutdown: closing all files...
+	2015-03-13T07:37:55.859+0000 I STORAGE  [initandlisten] closeAllFiles() finished
+	2015-03-13T07:37:55.859+0000 I CONTROL  [initandlisten] dbexit:  rc: 100
