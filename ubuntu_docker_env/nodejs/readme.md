@@ -4,6 +4,9 @@ The parent folder (host) of the dockerfile will be mounted to /service/www in co
 
 	$ docker build -t "jeffreyzksun/nodejs:v0.10.24" .
 	$ docker run --name nodejsserver -p 8000:80 -v $(pwd):/service/www -d jeffreyzksun/nodejs:v0.10.24
+
+Next time use the start/stop instrunction to operation the container.
+
 	$ docker stop nodejsserver
 	$ docker start nodejsserver
 
