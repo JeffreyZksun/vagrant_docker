@@ -56,24 +56,32 @@ entrypoint.sh inside the container.
 ===
 
 	#!/bin/bash
+	###Exit immediately if a command exits with a non-zero status.
 	set -e
 
+	#### the first parameter is ‘-'
 	if [ "${1:0:1}" = '-' ]; then
-	        set -- mongod "$@"
+	####"$@"  Stores all the arguments that were entered on the command line, individually quoted ("$1" "$2" …).
+	#### Then Assign any remaining arguments after the nongod parameters.
+	       set -- mongod "$@"
 	fi
 
 	if [ "$1" = 'mongod' ]; then
-	        chown -R mongodb /data/db
+	    chown -R mongodb /data/db
 
-	        numa='numactl --interleave=all'
-	        if $numa true &> /dev/null; then
-	                set -- $numa "$@"
-	        fi
+	    numa='numactl --interleave=all'
+		### Set a memory interleave policy. Memory will be allocated using round robin on true policy. Basically means this server is a numa architecture.
+	    if $numa true &> /dev/null; then
+			#### Assign any remaining arguments after the 'numactl --interleave=all' parameters.
+	        set -- $numa "$@"
+	    fi
 
-	        exec gosu mongodb "$@"
+		## same as su, means under mongodb user, exec command with the all parameters.
+	    exec gosu mongodb "$@"
 	fi
 
 	exec "$@"
+
 
 Trouble shouting
 ====
