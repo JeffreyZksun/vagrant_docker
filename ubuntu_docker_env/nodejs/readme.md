@@ -1,6 +1,6 @@
 Getting Started
 ====
-The parent folder (host) of the dockerfile will be mounted to /service/www in containter. You'd better to put all the nodejs files in this folder.
+This containter will execute the nodejs code of the current folder in the container. The port 80 is exported. That means the nodejs code should listen on this port.
 
 	$ docker build -t "jeffreyzksun/nodejs:v0.10.24" .
 	$ docker run --name nodejsserver -p 8000:80 -v $(pwd):/service/www -d jeffreyzksun/nodejs:v0.10.24

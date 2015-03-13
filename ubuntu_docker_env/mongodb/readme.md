@@ -1,5 +1,6 @@
 Getting Started
 ====
+This container runs a mongodb service at port 27017. You can you a folder in the host os to store the database data.
 
 	$ docker build -t "jeffreyzksun/mongodb:v3.0.0" .
 	$ docker run --name mongodbserver -p 27017:27017 -v /data/db:/data/db -d jeffreyzksun/mongodb:v3.0.0
