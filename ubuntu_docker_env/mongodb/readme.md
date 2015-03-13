@@ -16,7 +16,7 @@ Infrastructure
 OS
 ----
 
-- [Ubuntu 14.4 x64]
+- debian:wheezy
 
 Softwares
 ----
@@ -26,7 +26,7 @@ Softwares
 Default command
 ----
 
-	`/entrypoint.sh` inclide the container. 
+	`/entrypoint.sh mongod` inclide the container. 
 
 Port mapping
 ----
@@ -51,8 +51,8 @@ Other useful commands
 	$ docker run -p 27017:27017 -v $(pwd)/db:/data/db --rm -it jeffreyzksun/mongodb:v3.0.0  /bin/bash 
 	$ docker history jeffreyzksun/mongodb:v3.0.0
  
- entrypoint.sh inside the container.
- ===
+entrypoint.sh inside the container.
+===
 
 	#!/bin/bash
 	set -e
