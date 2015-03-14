@@ -1,13 +1,6 @@
-web:
-  build: ../nodejs
-  ports:
-   - "8000:80"
-  volumes:
-   - ../nodejs:/var/www
-  links:
-   - mongodb
+
 mongodb:
-  build: ../mongodb
+  image: jeffreyzksun/mongodb:v3.0.0
   ports:
    - "27017:27017"
   volumes:

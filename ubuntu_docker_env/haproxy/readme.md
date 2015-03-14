@@ -55,5 +55,5 @@ Other useful commands
 	$ docker attach haproxyserver
 	$ docker inspect haproxyserver
 	$ docker logs haproxyserver
-	$ docker run -p 8000:80 -v "$pwd/haproxy.cfg":/usr/local/etc/haproxy/haproxy.cfg:ro --rm -it jeffreyzksun/haproxy:v1.4.26  /bin/bash 
+	$ docker run -v "$pwd/haproxy.cfg":/usr/local/etc/haproxy/haproxy.cfg:ro --net=host --rm -it jeffreyzksun/haproxy:v1.4.26  /bin/bash 
 	$ docker history jeffreyzksun/haproxy:v1.4.26
