@@ -5,9 +5,9 @@ This container runs a elasticsearch service at port 9200. You can you a folder i
 	$ docker build -t "jeffreyzksun/elasticsearch:v1.4.4" .
 	$ docker run --name esserver -p 9200:9200 -p 9300:9300 -v /data:/usr/share/elasticsearch/data -d jeffreyzksun/elasticsearch:v1.4.4
 	
-Connect mongodb with port 9200. 
+Connect es with port 9200. 
 
-	$ curl 
+	$ curl ...
 
 Next time use the start/stop instrunction to operate the container.
 
