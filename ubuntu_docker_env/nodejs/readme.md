@@ -2,8 +2,8 @@ Getting Started
 ====
 This containter will execute the nodejs code of the current folder in the container. The port 80 is exported. That means the nodejs code should listen on this port.
 
-	$ docker build -t "jeffreyzksun/nodejs:v0.10.24" .
-	$ docker run --name nodejsserver -p 8000:80 -v $(pwd):/service/www -d jeffreyzksun/nodejs:v0.10.24
+	$ docker build -t "jeffreyzksun/nodejs:v0.10.36" .
+	$ docker run --name nodejsserver -p 8000:80 -v $(pwd):/service/www -d jeffreyzksun/nodejs:v0.10.36
 
 Next time use the start/stop instrunction to operate the container.
 
@@ -20,7 +20,7 @@ OS
 Softwares
 ----
 
-- nodejs v0.10.24
+- nodejs v0.10.36
 
 
 Port mapping
@@ -35,19 +35,15 @@ Shared folder
 | $(pwd) | /service/www 		|
 
 
+Base image: https://registry.hub.docker.com/_/node/
+
+
 Other useful commands
 ====
 
 	$ docker attach nodejsserver
 	$ docker inspect nodejsserver
 	$ docker logs nodejsserver
-	$ docker run -p 8000:80 -v $(pwd):/service/www --rm -it jeffreyzksun/nodejs:v0.10.24  /bin/bash 
-	$ docker history jeffreyzksun/nodejs:v0.10.24
+	$ docker run -p 8000:80 -v $(pwd):/service/www --rm -it jeffreyzksun/nodejs:v0.10.36  /bin/bash 
+	$ docker history jeffreyzksun/nodejs:v0.10.36
  
-Trouble shouting
-====
-Failed to execute the build instruction. `$ docker build -t "jeffreyzksun/nodejs:v0.10.24" .`
-
-The error looks like this: Error response from daemon: Cannot start container 9f3bd8d72f0704980cedacc068261c38e280e7314916245550a6d48431ea8f11: fork/exec /var/lib/docker/init/dockerinit-1.0.1: cannot allocate memory
-
-Solution: execute `$ sudo service docker.io restart` and then try again.

@@ -1,0 +1,14 @@
+web:
+  build: ../nodejs
+  ports:
+   - "8000:80"
+  volumes:
+   - ../nodejs:/var/www
+  links:
+   - mongodb
+mongodb:
+  build: ../mongodb
+  ports:
+   - "27017:27017"
+  volumes:
+   - /data/db:/data/db

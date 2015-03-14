@@ -1,0 +1,22 @@
+{
+  "name": "webserver",
+  "version": "0.1.1",
+  "author": "Jeffrey Sun",
+  "description": "A simple web server",
+  "main": "server.js",
+  "engines": {
+    "node": "0.10.x"
+  },
+  "dependencies": {
+	 "express": "3.0.x"
+  },
+   "devDependencies": {
+    },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": "",
+  "keywords": [
+    "webserver"
+  ]
+}
