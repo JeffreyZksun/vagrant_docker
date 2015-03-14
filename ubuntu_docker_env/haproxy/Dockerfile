@@ -4,3 +4,6 @@
 #
 FROM haproxy:1.4.26
 MAINTAINER Jeffrey Sun <jeffrey.sun@autodesk.com>
+
+EXPOSE 80
+EXPOSE 8101

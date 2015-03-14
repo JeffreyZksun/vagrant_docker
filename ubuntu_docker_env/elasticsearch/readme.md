@@ -7,7 +7,7 @@ This container runs a elasticsearch service at port 9200. You can you a folder i
 	
 Connect es with port 9200. 
 
-	$ curl ...
+	$ curl -XGET http://localhost:9200
 
 Next time use the start/stop instrunction to operate the container.
 
