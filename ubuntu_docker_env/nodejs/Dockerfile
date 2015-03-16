@@ -2,7 +2,7 @@
 #
 # VERSION               0.0.1
 #
-FROM nodejs:0.10.36
+FROM node:0.10.36
 MAINTAINER Jeffrey Sun <jeffrey.sun@autodesk.com>
 
 # the port of the node service
