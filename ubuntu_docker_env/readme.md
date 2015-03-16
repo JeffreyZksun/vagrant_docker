@@ -26,6 +26,12 @@ The folder structure for the service related stuffs.
  - `/data/xxx` The data storage.
  - `/config/xxx` The config files. 
 
+Tips
+====
+
+ - Once the bootstrap.sh changes, destroy the vm and recreate it again.
+ - Once the vagrantfile changes, like port mapping is changed, halt the vm and run reload.
+
 Vagrant root user password
 ====
 password: vagrant
