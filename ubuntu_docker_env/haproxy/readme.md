@@ -3,7 +3,7 @@ Getting Started
 This container runs a haproxy service with ports 8101, 8102 and 8103 exposed. The 8101 port is for the status monitor. 8102 is for the external web servers. 8103 is for the web servers on the same host.
 
 	$ docker build -t "jeffreyzksun/haproxy:v1.4.26" .
-	$ docker run --name haproxyserver -p 8101:8101 -p 8102:8102 -p 8103:8103 --net=host -v "$pwd/haproxy.cfg":/usr/local/etc/haproxy/haproxy.cfg:ro -d jeffreyzksun/haproxy:v1.4.26
+	$ docker run --name haproxyserver -p 8101:8101 -p 8102:8102 -p 8103:8103 --net=host -v "$(pwd)/haproxy.cfg":/usr/local/etc/haproxy/haproxy.cfg:ro -d jeffreyzksun/haproxy:v1.4.26
 	
 Connect haproxy with the ports. 
 
@@ -55,5 +55,5 @@ Other useful commands
 	$ docker attach haproxyserver
 	$ docker inspect haproxyserver
 	$ docker logs haproxyserver
-	$ docker run -v "$pwd/haproxy.cfg":/usr/local/etc/haproxy/haproxy.cfg:ro --net=host --rm -it jeffreyzksun/haproxy:v1.4.26  /bin/bash 
+	$ docker run -v "$(pwd)/haproxy.cfg":/usr/local/etc/haproxy/haproxy.cfg:ro --net=host --rm -it jeffreyzksun/haproxy:v1.4.26  /bin/bash 
 	$ docker history jeffreyzksun/haproxy:v1.4.26

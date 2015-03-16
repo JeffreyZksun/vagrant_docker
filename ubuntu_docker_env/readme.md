@@ -8,7 +8,8 @@ OS
 Softwares
 ----
 
-- Docker
+- Docker 1.5.0
+- Docker-compose 1.1.0
 
 Ports mapping
 ----
@@ -25,4 +26,7 @@ The folder structure for the service related stuffs.
  - `/data/xxx` The data storage.
  - `/config/xxx` The config files. 
 
+Vagrant root user password
+====
+password: vagrant
 

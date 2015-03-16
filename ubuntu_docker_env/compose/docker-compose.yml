@@ -1,6 +1,6 @@
 
 mongodb:
-  image: jeffreyzksun/mongodb:v3.0.0
+  build: ../mongodb
   ports:
    - "27017:27017"
   volumes:
