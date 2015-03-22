@@ -1,6 +1,8 @@
+#!/bin/bash
+
 #
 # Usage: ./startcontainer [local|alpha|prod]
-# Default value is local.
+# Default value is local. This value will be passed into container as the value of the system variable named 'build'.
 # 
 # Logic:
 # 1. check if the old container exists. Stop and delete it if there is.
