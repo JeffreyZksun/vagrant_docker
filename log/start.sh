@@ -5,9 +5,9 @@ cd $EXTENSION_DIR
 ABSOLUTE_PATH=`pwd`
 
 # start elk server
-#cd ${ABSOLUTE_PATH}/elkserver
-#make certs
-#sudo docker-compose up
+cd ${ABSOLUTE_PATH}/elkserver
+make certs
+sudo docker-compose start
 
 # Copy certs
 cd ${ABSOLUTE_PATH}
