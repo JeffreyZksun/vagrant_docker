@@ -8,6 +8,8 @@ This container runs logslash-forwarder service.
 
 Note: `--net=host` gives container the whole control to the network of the host. When use localhost or 127.0.0.1 inside the container, this addess is the host's lo address. 
 
+Note: the certs should be the same as that used in the logslash server.
+
 Send log to logslash server via forwarder
 ====
 
@@ -49,3 +51,4 @@ Shared folder
 | $(pwd)/conf           | /opt/conf         |
 | /tmp/logs             | /logs             |
 
+Base image: https://registry.hub.docker.com/_/ubuntu/
