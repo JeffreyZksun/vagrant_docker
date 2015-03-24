@@ -1,0 +1,13 @@
+logslashforwader:
+    image: jeffreyzksun/forwarder:v0.4.0
+    net: host
+    volumes:
+        - ./logslash-forwarder/certs:/opt/certs
+        - ./logslash-forwarder/conf:/opt/conf
+        - /tmp/logs:/logs 
+
+nodejsapp:
+    image: jeffreyzksun/nodejs:v0.10.36
+    volumes:
+        - ./nodejs:/service/www
+        - /tmp/logs:/logs 

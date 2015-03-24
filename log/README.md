@@ -25,17 +25,11 @@ Get started
 	$ vagrant up
 	$ vagrant ssh
 
-	$ cd /vagrant/elkserver
-	$ make certs
-	$ sudo docker-compose up
 	$ cd /vagrant
+	$ ./build.sh
 	$ ./start.sh
 
 Visit http://localhost:5601 to access the Kibana interface
-
-Note: Once you make changes to elkserver, you need to execute docker-compose up again. The start.sh just start the existing server.
-
-Note: Once you make changes to appserver, you just need to re-execute start.sh. The image and container will be re-generated.
 
 Send log to logslash server via TCP port
 ====

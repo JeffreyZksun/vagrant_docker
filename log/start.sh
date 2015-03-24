@@ -4,11 +4,6 @@ cd $EXTENSION_DIR
 
 ABSOLUTE_PATH=`pwd`
 
-# start elk server
-cd ${ABSOLUTE_PATH}/elkserver
-make certs
-sudo docker-compose start
-
 # Copy certs
 cd ${ABSOLUTE_PATH}
 if [ ! -d ${ABSOLUTE_PATH}/appserver/logslash-forwarder/certs  ]; then \
@@ -16,11 +11,11 @@ if [ ! -d ${ABSOLUTE_PATH}/appserver/logslash-forwarder/certs  ]; then \
 fi
 cp -a ${ABSOLUTE_PATH}/elkserver/certs/* ${ABSOLUTE_PATH}/appserver/logslash-forwarder/certs/
 
-# create logs data folder
-mkdir -p /tmp/logs && touch /tmp/logs/test.log && touch /tmp/logs/nodejsapp.log
 
 # start logslash forwarder
-sudo ${ABSOLUTE_PATH}/appserver/logslash-forwarder/startcontainer.sh
+cd ${ABSOLUTE_PATH}/elkserver
+sudo docker-compose start
 
 # start nodejs app
-sudo ${ABSOLUTE_PATH}/appserver/nodejs/startcontainer.sh
+cd ${ABSOLUTE_PATH}/appserver
+sudo docker-compose start

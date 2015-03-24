@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Usage: ./startcontainer 
+# Usage: ./buildimage 
 # 
 # Logic:
 # 1. check if the old container exists. Stop and delete it if there is.
@@ -24,6 +24,3 @@ echo "Deleting image" ${IMAGE}
 docker rmi ${IMAGE}
 echo "Building image" ${IMAGE}
 docker build -t ${IMAGE} .
-
-echo "Starting container" ${CONTAINTER}
-docker run --name ${CONTAINTER} --restart="always" -v /tmp/logs:/logs -v $(pwd):/service/www -d ${IMAGE}
