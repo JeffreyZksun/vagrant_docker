@@ -25,6 +25,7 @@ The folder structure for the service related stuffs.
  - `/service/xxx` The source code of the service.
  - `/data/xxx` The data storage.
  - `/config/xxx` The config files. 
+ - `/logs/xxx` The log files.
 
 Tips
 ====

@@ -8,6 +8,17 @@ The is a project to demo manage the container log in the centrialized logslash s
  - Kibana: Web interface for searching and visualizing logs
  - Logstash Forwarder: Installed on servers that will send their logs to Logstash, Logstash Forwarder serves as a log forwarding agent that utilizes the lumberjack networking protocol to communicate with Logstash
 
+Log management
+====
+
+Basically there a re three approaches to collect the log. We are using #3 in this project.
+
+
+ 1. Collection inside container - Each container starts up a daemon log collection process. This manner break the rule: run a process in a container.
+ 2. Collection outside conatiner - A single collection agent runs on the host machine. Container writes the log to the mounted volume.
+ 3. Collection in separate container - A single collection agent runs in a separate log container. The logs volume mounts to both the app and log container.
+
+
 Get started
 ====
 

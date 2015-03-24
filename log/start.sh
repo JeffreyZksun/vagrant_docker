@@ -20,7 +20,7 @@ cp -a ${ABSOLUTE_PATH}/elkserver/certs/* ${ABSOLUTE_PATH}/appserver/logslash-for
 mkdir -p /tmp/logs && touch /tmp/logs/test.log && touch /tmp/logs/nodejsapp.log
 
 # start logslash forwarder
-#sudo ${ABSOLUTE_PATH}/appserver/logslash-forwarder/startcontainer.sh
+sudo ${ABSOLUTE_PATH}/appserver/logslash-forwarder/startcontainer.sh
 
 # start nodejs app
-#sudo ${ABSOLUTE_PATH}/appserver/nodejs/startcontainer.sh
+sudo ${ABSOLUTE_PATH}/appserver/nodejs/startcontainer.sh
