@@ -1,7 +1,7 @@
-Centralized log system
+Centralized log management
 ============
 
-The is a project to demo manage the container log in the centrialized logslash server.
+The is a project to demo manage the container log in the centrialized logslash server. This soluction can be used in your backend to manage the logs.
 
  - Logstash: The server component of Logstash that processes incoming logs. It is an open source tool for collecting, parsing, and storing logs for future use. 
  - Elasticsearch: Stores all of the logs
