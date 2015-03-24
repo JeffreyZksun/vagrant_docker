@@ -1,0 +1,6 @@
+.git/
+.vagrant
+Dockerfile
+Vagrantfile
+README.md
+node_modules/

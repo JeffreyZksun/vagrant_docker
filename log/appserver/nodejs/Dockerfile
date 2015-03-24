@@ -1,0 +1,20 @@
+# Nodejs
+#
+# VERSION               0.0.1
+#
+FROM node:0.10.36
+MAINTAINER Jeffrey Sun <jeffrey.sun@autodesk.com>
+
+# the port of the node service
+EXPOSE 80
+
+# The root folder of the server.
+RUN mkdir -p /service/www
+VOLUME /service/www
+
+RUN mkdir -p /logs
+VOLUME /service/logs
+
+# start the server
+WORKDIR /service/www
+CMD npm install && npm start >> /logs/nodejsapp.log

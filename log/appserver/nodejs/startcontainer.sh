@@ -14,7 +14,7 @@
 EXTENSION_DIR=`dirname "$0"`
 cd $EXTENSION_DIR
 
-IMAGE=jeffreyzksun/nodejs:v0.10.24
+IMAGE=jeffreyzksun/nodejs:v0.10.36
 CONTAINTER=nodejsserver
 
 echo "Stopping container" ${CONTAINTER}
@@ -34,4 +34,4 @@ else
 fi
 
 echo "Starting container" ${CONTAINTER} "with" ${BUILD_ENV} "env"
-docker run --name ${CONTAINTER} --restart="always" --env build=${BUILD_ENV} -p 8000:80 -v $(pwd):/service/www -d ${IMAGE}
+docker run --name ${CONTAINTER} --restart="always" --env build=${BUILD_ENV} -v /tmp/logs:/logs -v $(pwd):/service/www -d ${IMAGE}
