@@ -1,34 +1,51 @@
-# Logstash-forwarder Dockerfile
+Getting Started
+====
+This container runs logslash-forwarder service.
 
-logstash-forwarder 0.3.1
+    $ docker build -t "jeffreyzksun/logslash-forwarder:v0.4.0" .
+    $ docker run --name logforwarder --net=host -v /tmp/logs:/logs -v $(pwd)/certs:/opt/certs -v $(pwd)/conf:/opt/conf -d jeffreyzksun/logslash-forwarder:v0.4.0
+    
 
-NOTE: First visit this repo and learn how to run the whole ELK stack : https://github.com/denibertovic/elk-stack-docker
+Note: `--net=host` gives container the whole control to the network of the host. When use localhost or 127.0.0.1 inside the container, this addess is the host's lo address. 
 
-Clone the repo:
+Send log to logslash server via forwarder
+====
 
-    git clone https://github.com/denibertovic/logstash-forwarder-dockerfile
+Make sure the logslash server is running.
 
-Make sure to use the certificates used to start Logstash from the ELK-stack repository above.
+    cat >> /tmp/logs/test.log
+        test
+        test
+        test
+        ^C
+    # You should see the messages show up on logstash
 
-Pull
 
-    docker pull denibertovic/logstash-forwarder
+Infrastructure
+====
+OS
+----
 
-Run and test
+- ubuntu:14.04
 
-    mkdir /tmp/test && touch /tmp/test/test.log
-    docker run --name forwarder -d -v /tmp/test:/tmp/test -v `pwd`/conf-example:/opt/conf -v `pwd`/certs:/opt/certs -t denibertovic/logstash-forwarder
+Softwares
+----
 
-    cat >> /tmp/test/test.log
-    test
-    test
-    test
-    ^C
+- logslash-forwarder v0.4.0
 
-    Log in to the Kibana interface, you should see the logs 3 test messages there.
+Default command
+----
 
-Volumes:
+    `/opt/logstash-forwarder/bin/logstash-forwarder -config /opt/conf/config.json` inclide the container. 
 
-    /opt/conf  - Configuration folder with config.json
-    /opt/certs - Certs folder with logstash-forwarder.crt and logstash-forwarder.key (used to start logstash)
+Port mapping
+----
+
+
+Shared folder
+----
+| Host                  | Docker container  | 
+| $(pwd)/certs          | /opt/certs        |
+| $(pwd)/conf           | /opt/conf         |
+| /tmp/logs             | /logs             |
 

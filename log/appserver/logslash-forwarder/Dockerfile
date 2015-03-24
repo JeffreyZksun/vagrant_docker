@@ -1,31 +1,17 @@
-# logstash-forwarder
+# logslash-forwarder v 0.4.0
 #
-# A tool to collect logs locally in preparation for processing elsewhere
+# VERSION               0.0.1
 #
-# VERSION               0.3.1
+FROM ubuntu:14.04
+MAINTAINER Jeffrey Sun <jeffrey.sun@autodesk.com>
 
-FROM      debian:jessie
-MAINTAINER Deni Bertovic "me@denibertovic.com"
+RUN echo 'deb http://packages.elasticsearch.org/logstashforwarder/debian stable main' | tee /etc/apt/sources.list.d/logstashforwarder.list
+RUN wget -O - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | apt-key add -
+RUN apt-get update && apt-get install logstash-forwarder
 
-ENV DEBIAN_FRONTEND noninteractive
+# The root folder of the server.
+RUN mkdir -p /opt/certs && mkdir -p /opt/conf && mkdir -p /logs
+VOLUME ["/opt/certs", "/opt/conf", "/logs"]
 
-RUN apt-get update
-
-# install deps
-RUN apt-get install -y git golang
-
-# clone logstash-forwarder
-RUN git clone git://github.com/elasticsearch/logstash-forwarder.git /tmp/logstash-forwarder
-RUN cd /tmp/logstash-forwarder && git checkout v0.3.1 && go build
-
-RUN mkdir /opt/forwarder && cp /tmp/logstash-forwarder/logstash-forwarder /opt/forwarder/logstash-forwarder
-
-ADD start_forwarder.sh /usr/local/bin/start_forwarder.sh
-RUN chmod 755 /usr/local/bin/start_forwarder.sh
-
-RUN rm -rf /tmp/*
-
-VOLUME ["/opt/conf", "/opt/certs"]
-
-CMD /usr/local/bin/start_forwarder.sh
-
+# start the server
+CMD /opt/logstash-forwarder/bin/logstash-forwarder -config /opt/conf/config.json

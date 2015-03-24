@@ -14,7 +14,7 @@
 EXTENSION_DIR=`dirname "$0"`
 cd $EXTENSION_DIR
 
-IMAGE=jeffreyzksun/forwarder:v0.0.1
+IMAGE=jeffreyzksun/forwarder:v0.4.0
 CONTAINTER=forwarder
 
 echo "Stopping container" ${CONTAINTER}
@@ -27,4 +27,4 @@ echo "Building image" ${IMAGE}
 docker build -t ${IMAGE} .
 
 echo "Starting container" ${CONTAINTER}
-docker run --name ${CONTAINTER} --restart="always" --net=host -v /tmp/logs:/logs -v $(pwd)/certs:/opt/certs -d ${IMAGE}
+docker run --name ${CONTAINTER} --restart="always" --net=host -v /tmp/logs:/logs -v $(pwd)/certs:/opt/certs -v $(pwd)/conf:/opt/conf -d ${IMAGE}

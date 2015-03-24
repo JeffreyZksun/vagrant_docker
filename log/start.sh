@@ -11,12 +11,16 @@ ABSOLUTE_PATH=`pwd`
 
 # Copy certs
 cd ${ABSOLUTE_PATH}
-cp -a ${ABSOLUTE_PATH}/elkserver/certs ${ABSOLUTE_PATH}/appserver/logslash-forwarder/certs
+if [ ! -d ${ABSOLUTE_PATH}/appserver/logslash-forwarder/certs  ]; then \
+	mkdir ${ABSOLUTE_PATH}/appserver/logslash-forwarder/certs; \
+fi
+cp -a ${ABSOLUTE_PATH}/elkserver/certs/* ${ABSOLUTE_PATH}/appserver/logslash-forwarder/certs/
 
 # create logs data folder
 mkdir -p /tmp/logs && touch /tmp/logs/test.log && touch /tmp/logs/nodejsapp.log
 
 # start logslash forwarder
-sudo ${ABSOLUTE_PATH}/appserver/logslash-forwarder/startcontainer.sh
+#sudo ${ABSOLUTE_PATH}/appserver/logslash-forwarder/startcontainer.sh
 
 # start nodejs app
+#sudo ${ABSOLUTE_PATH}/appserver/nodejs/startcontainer.sh
