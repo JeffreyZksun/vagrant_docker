@@ -1,7 +1,6 @@
 Introduction
 ====
-This is a tutorial to setup teamcity CI systeam to build the nodejs app.
-
+This is a tutorial to setup teamcity CI system to build the nodejs app. Run the server on a machine with memory greater than 2G. 
 
 
 Setup teamcity server
