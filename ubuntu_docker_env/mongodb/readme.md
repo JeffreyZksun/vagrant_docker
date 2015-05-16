@@ -1,9 +1,9 @@
 Getting Started
 ====
-This container runs a mongodb service at port 27017. You can you a folder in the host os to store the database data.
+This container runs a mongodb service at port 27017 and rest interface at port 28017. You can you a folder in the host os to store the database data.
 
 	$ docker build -t "jeffreyzksun/mongodb:v3.0.0" .
-	$ docker run --name mongodbserver -p 27017:27017 -v /data/db:/data/db -d jeffreyzksun/mongodb:v3.0.0
+	$ docker run --name mongodbserver -p 27017:27017 -p 28017:28017 -v /data/mongodb:/data/db -d jeffreyzksun/mongodb:v3.0.0
 	
 Connect mongodb with port 27017. 
 
@@ -37,6 +37,7 @@ Port mapping
 
 | Host   | Docker container | 
 | 27017  | 27017 			|
+| 28017  | 28017 			|
 
 Shared folder
 ----
@@ -53,7 +54,7 @@ Other useful commands
 	$ docker attach mongodbserver
 	$ docker inspect mongodbserver
 	$ docker logs mongodbserver
-	$ docker run -p 27017:27017 -v /data/db:/data/db --rm -it jeffreyzksun/mongodb:v3.0.0  /bin/bash 
+	$ docker run -p 27017:27017 -p 28017:28017 -v /data/db:/data/db --rm -it jeffreyzksun/mongodb:v3.0.0  /bin/bash 
 	$ docker history jeffreyzksun/mongodb:v3.0.0
  
 entrypoint.sh inside the container.
