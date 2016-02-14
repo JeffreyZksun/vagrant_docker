@@ -12,10 +12,8 @@ logstash:
   image: logstash:2.2
   command: logstash -f /etc/logstash/conf.d
   volumes:
-    - ./logstash/conf.d/01-lumberjack-input.conf:/etc/logstash/conf.d/01-lumberjack-input.conf
     - ./logstash/conf.d/02-beats-input.conf:/etc/logstash/conf.d/02-beats-input.conf
-    - ./logstash/conf.d/10-syslog.conf:/etc/logstash/conf.d/10-syslog.conf
-    - ./logstash/conf.d/11-nginx.conf:/etc/logstash/conf.d/11-nginx.conf
+    - ./logstash/conf.d/12-json.conf:/etc/logstash/conf.d/12-json.conf
     - ./logstash/conf.d/30-output.conf:/etc/logstash/conf.d/30-output.conf
     - ./patterns/nginx/nginx.pattern:/opt/logstash/patterns/nginx
     - ./logstash/certs:/etc/pki/tls/certs
@@ -34,4 +32,3 @@ kibana:
   environment:
     - ELASTICSEARCH_URL=http://elasticsearch:9200
   restart: always
-
