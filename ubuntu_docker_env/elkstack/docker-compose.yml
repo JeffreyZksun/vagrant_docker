@@ -5,17 +5,16 @@ elasticsearch:
     - "9200:9200"
     - "9300:9300"
   volumes:
-    - /tmp/data:/usr/share/elasticsearch/data
-    - /tmp/log:/var/log/elasticsearch
+    - ./elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml
+    - /tmp/elasticsearch/data:/usr/share/elasticsearch/data
+    - /tmp/elasticsearch/logs:/usr/share/elasticsearch/logs
   restart: always
 logstash:
   image: logstash:2.2
   command: logstash -f /etc/logstash/conf.d
   volumes:
     - ./logstash/conf.d/02-beats-input.conf:/etc/logstash/conf.d/02-beats-input.conf
-    - ./logstash/conf.d/12-json.conf:/etc/logstash/conf.d/12-json.conf
     - ./logstash/conf.d/30-output.conf:/etc/logstash/conf.d/30-output.conf
-    - ./patterns/nginx/nginx.pattern:/opt/logstash/patterns/nginx
     - ./logstash/certs:/etc/pki/tls/certs
   ports:
     - "5000:5000"

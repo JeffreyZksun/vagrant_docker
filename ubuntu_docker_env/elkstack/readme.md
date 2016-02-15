@@ -28,7 +28,11 @@ Trouble shooting
 	logstash_1      |   undefined method `close' for nil:NilClass
 	elkstack_logstash_1 exited with code 0
 
-	Start the container one by one can by pass the issue.
+Use `docker-compose run logstash /bin/sh` to login the container. Add `--debug` parameter to show more information.
+
+	logstash -f /etc/logstash/conf.d --debug
+
+Start the container one by one can by pass the issue.
 
 	docker-compose start elasticsearch
 	docker-compose start logstash
